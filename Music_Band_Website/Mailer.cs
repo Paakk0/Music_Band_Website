@@ -1,17 +1,14 @@
-﻿using MimeKit;
+﻿using Music_Band_Website.Model;
 using MailKit.Net.Smtp;
-using Music_Band_Website.Model;
-using System.Text;
-using System.Security.Cryptography;
-using System.Runtime.CompilerServices;
-using System.Reflection;
+using MailKit.Security;
+using MimeKit;
 
 namespace Restaurant.Model
 {
     public class Mailer
     {
-        private static string From { get; set; } = "email@example.com";
-        private static string Key { get; set; } = "password";
+        private static string From { get; set; } = "xrisi101@gmail.com";
+        private static string Key { get; set; } = Environment.GetEnvironmentVariable("GMAIL_APP_PASSWORD");
 
         private static Dictionary<string, string> Messages { get; set; } = new Dictionary<string, string>()
         {
@@ -56,14 +53,15 @@ namespace Restaurant.Model
                     {
                         Text = Messages[subject]
                             .Replace("{0}", receiver.First_Name + " " + receiver.Last_Name)
-                            .Replace("{1}", receiver.Password ?? "")
+                            .Replace("{1}", receiver.Password ?? "")    
                             .Replace("{2}", From)
                     };
                 }
 
+                Console.WriteLine($"Gmail Key: {(string.IsNullOrEmpty(Key) ? "EMPTY OR NULL" : "Loaded OK")}");
                 using (var client = new SmtpClient())
                 {
-                    await client.ConnectAsync("smtp.abv.bg", 465, MailKit.Security.SecureSocketOptions.SslOnConnect);
+                    await client.ConnectAsync("smtp.gmail.com", 587, SecureSocketOptions.StartTls);
                     await client.AuthenticateAsync(From, Key);
                     await client.SendAsync(message);
                     await client.DisconnectAsync(true);
