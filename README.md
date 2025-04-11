@@ -6,6 +6,7 @@ Before start:
    Sql Server Managment System -> server name
 
 2. (Optional) For emails:
-   Go to Mailer.cs and change:
-   "email@example.com" -> your_email address
-   "password" -> your_email_password
+   Go to Mailer.cs and change
+   From -> your_email address
+   Generate app password and set it to "GMAIL_APP_PASSWORD"
+   in cmd: (setx GMAIL_APP_PASSWORD "your_key")
