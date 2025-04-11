@@ -1,0 +1,68 @@
+﻿@page
+@model AboutModel
+@{
+    ViewData["Title"] = "About Us";
+}
+
+<link rel="stylesheet" href="~/css/about.css?v=1.0">
+
+<div class="container mt-5">
+    <h1 class="text-center mb-4">За <span class="group-name">Mental!</span></h1>
+
+    <section class="text-center mb-4">
+        <img src="~/images/group_photo.jpg" alt="Band Group" class="img-fluid rounded shadow" style="max-width: 80%; border-radius: 15px;">
+    </section>
+
+    <section class="mb-5 text-center">
+        <h2>Кои сме ние</h2>
+        <p class="lead">
+            <span class="group-name">Mental</span> е група от 4 члена, <br />
+            които създават музика в стила на thrash/groove метъл,<br />
+            но експериментират и с grunge, alt rock, death metal, nu metal и metalcore. <br />
+            Музицират заедно от 2023г.<br />
+            Правим каквото ни кефи без етикети.
+        </p>
+    </section>
+
+    <section>
+        <h2 class="text-center">Запознай се с групата</h2>
+        <div class="row justify-content-center">
+            <div class="col-md-2">
+                <div class="card text-center shadow-lg border-0">
+                    <img src="/images/member1.png" class="card-img-top rounded-top" alt="Николай Илиев">
+                    <div class="card-body">
+                        <h5 class="card-title">Николай Илиев</h5>
+                        <p class="card-text">Соло китара и вокали</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="card text-center shadow-lg border-0">
+                    <img src="/images/member1.png" class="card-img-top rounded-top" alt="Енис Бучкалиев">
+                    <div class="card-body">
+                        <h5 class="card-title">Енис Бучкалиев</h5>
+                        <p class="card-text">Бас китара</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="card text-center shadow-lg border-0">
+                    <img src="/images/member1.png" class="card-img-top rounded-top" alt="Иван Зойков">
+                    <div class="card-body">
+                        <h5 class="card-title">Иван Зойков</h5>
+                        <p class="card-text">Барабани</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="card text-center shadow-lg border-0">
+                    <img src="/images/member1.png" class="card-img-top rounded-top" alt="Емил Найденов">
+                    <div class="card-body">
+                        <h5 class="card-title">Емил Найденов</h5>
+                        <p class="card-text">Соло китара</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

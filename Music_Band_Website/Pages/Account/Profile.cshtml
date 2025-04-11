@@ -1,0 +1,26 @@
+﻿@page
+@model Music_Band_Website.Pages.Profile.ProfileModel
+@{
+    ViewData["Title"] = "Profile";
+}
+
+<link rel="stylesheet" href="~/css/account/profile.css" asp-append-version="true" />
+
+<div class="profile-container">
+    <div class="image-section">
+        <img src="~/images/user_image.jpg" alt="User Profile Picture" />
+    </div>
+    <div class="personal-info">
+        <h2 class="user-name">@Model.User?.First_Name @Model.User?.Last_Name</h2>
+        <h4 class="user-role">@Model.Role</h4>
+        <div class="info-group">
+            <span><strong>Имейл:</strong> @Model.User?.Email</span>
+            <span><strong>Тел. Номер:</strong> @Model.User?.Phone_Number</span>
+            <span><strong>Присъединен на:</strong> @Model.User?.Registration_Date.ToString("yyyy-MM-dd")</span>
+        </div>
+        <a href="/Account/Edit" class="edit-button">Редактирай Профила</a>
+        <form method="post">
+            <button class="logout-button" type="submit">Изход</button>
+        </form>
+    </div>
+</div>

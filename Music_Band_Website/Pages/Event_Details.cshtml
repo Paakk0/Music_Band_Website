@@ -1,0 +1,79 @@
+﻿@page
+@model Music_Band_Website.Pages.Event_DetailsModel
+
+<link href="~/css/event_details.css?v=1.0" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+
+
+<section class="event-container">
+    <div class="event-card">
+        <h1 class="event-title">@Model.Event.City</h1>
+        <h2 class="event-location">@Model.Event.Location</h2>
+        <h3 class="event-date">@Model.Event.DateTime.ToString("f")</h3>
+        <p class="event-tickets">Общ брой закупени билети: <strong>@Model.Event_Tickets</strong></p>
+
+        <div class="ticket-box">
+            <form method="post" asp-page-handler="BuyTickets">
+                <input type="hidden" name="id" value="@Model.Event.Id" />
+                <label for="ticketCount">Брой билети:</label>
+                <input type="number" name="TicketCount" id="ticketCount" min="1" value="1" required class="ticket-input" />
+
+                <button type="submit" class="btn-buy">Купи билети</button>
+            </form>
+
+            @if (TempData["Message"] != null)
+            {
+                <p class="success-message">@TempData["Message"]</p>
+            }
+        </div>
+    </div>
+</section>
+
+<section class="event-songs">
+    <h2 class="songs-title">Песни от събитието</h2>
+
+    @if (Model.Event_Songs != null && Model.Event_Songs.Any())
+    {
+        <div class="song-grid">
+            @foreach (var song in Model.Event_Songs)
+            {
+                <div class="song-card">
+                    <img src="@song.Cover_Image" alt="@song.Title" class="song-cover">
+                    <div class="song-info">
+                        <h3>@song.Title</h3>
+                        <p>@song.Description</p>
+                        <span class="song-genre">@song.Music_Type.Type</span>
+                    </div>
+                    <div class="song-actions">
+                        <a asp-page="/Song_Player" asp-route-id="@song.Id" class="btn-play">▶ Play</a>
+                        @if (Model.User != null)
+                        {
+                            <form method="post" class="like-form">
+                                <input type="hidden" name="id" value="@song.Id" />
+                                <input type="hidden" name="method" value="@(Model.IsSongLiked(song.Id) ? "2" : "1")" />
+                                @if (Model.IsSongLiked(song.Id))
+                                {
+                                    <input type="hidden" name="method" value="2" />
+                                    <button type="submit" class="btn-like liked">
+                                        ❤️
+                                    </button>
+                                }
+                                else
+                                {
+                                    <input type="hidden" name="method" value="1" />
+                                    <button type="submit" class="btn-like">
+                                        🤍
+                                    </button>
+                                }
+                            </form>
+                        }
+                    </div>
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <p class="no-songs">Няма налични песни за това събитие.</p>
+    }
+</section>

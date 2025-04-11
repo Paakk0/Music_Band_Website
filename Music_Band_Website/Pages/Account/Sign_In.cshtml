@@ -1,0 +1,41 @@
+﻿@page
+@model Music_Band_Website.Pages.Profile.Sign_InModel
+@{
+    Layout = "_Layout";
+}
+
+<link rel="stylesheet" href="~/css/account/sign_in.css?v=1.1">
+
+<body>
+    <div class="login-container">
+        @if (TempData["Error"] != null)
+        {
+            <div class="alert-danger">@TempData["Error"]</div>
+        }
+
+        <form method="post" class="login-form">
+            <h1 class="title">Вход</h1>
+
+            <div class="input-group">
+                <input type="email" placeholder="Имейл" asp-for="email" required>
+                @if (TempData["EmailError"] != null)
+                {
+                    <div class="alert-danger">@TempData["EmailError"]</div>
+                }
+            </div>
+
+            <div class="input-group">
+                <input type="password" placeholder="Парола" asp-for="password" required>
+                @if (TempData["PasswordError"] != null)
+                {
+                    <div class="alert-danger">@TempData["PasswordError"]</div>
+                }
+            </div>
+
+            <button type="submit" class="btn-submit">Вход</button>
+            <p class="links">Нямаш акаунт? <a asp-page="/Account/Sign_Up">Регистрирай се</a></p>
+            <p class="links">Забравена парола? <a asp-page="/Account/Retreive_Password">Кликни тук</a></p>
+        </form>
+    </div>
+</body>
+</html>

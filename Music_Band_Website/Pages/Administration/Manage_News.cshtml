@@ -1,0 +1,79 @@
+﻿@page
+@model Music_Band_Website.Pages.Administration.Manage_NewsModel
+
+<link href="~/css/administration/manage_news.css?v=1.0" rel="stylesheet" />
+
+<h1 class="page-title">Manage News</h1>
+
+<div class="add-news">
+    <h2 class="section-title">Add News</h2>
+    <form method="post" asp-page-handler="Add" enctype="multipart/form-data" class="news-form">
+        <label class="form-label">Title:</label>
+        <input type="text" name="Title" class="form-input" required />
+
+        <label class="form-label">Description:</label>
+        <textarea name="Description" class="form-textarea" required></textarea>
+
+        <label class="form-label">Details:</label>
+        <textarea name="Details" class="form-textarea"></textarea>
+
+        <label class="form-label">Upload Image:</label>
+        <input type="file" name="ImageFile" class="form-file-input" />
+
+        <button type="submit" class="btn-submit">Add News</button>
+    </form>
+</div>
+
+@if (Model.EditNews != null)
+{
+    <div class="edit-news">
+        <h2 class="section-title">Edit News</h2>
+        <form method="post" asp-page-handler="Edit" enctype="multipart/form-data" class="news-form">
+            <input type="hidden" name="Id" value="@Model.EditNews.Id" />
+
+            <label class="form-label">Title:</label>
+            <input type="text" name="Title" class="form-input" value="@Model.EditNews.Title" required />
+
+            <label class="form-label">Description:</label>
+            <textarea name="Description" class="form-textarea" required>@Model.EditNews.Description</textarea>
+
+            <label class="form-label">Details:</label>
+            <textarea name="Details" class="form-textarea">@Model.EditNews.Details</textarea>
+
+            <label class="form-label">Upload Image:</label>
+            <input type="file" name="ImageFile" class="form-file-input" />
+
+            <button type="submit" class="btn-submit">Save</button>
+        </form>
+    </div>
+}
+
+<h3 class="existing-news-title">Existing News</h3>
+<table class="news-table">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Details</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var newsItem in Model.NewsList)
+        {
+            <tr>
+                <td>@newsItem.Title</td>
+                <td>@newsItem.Description</td>
+                <td>@newsItem.Details</td>
+                <td class="news-actions">
+                    <a href="?editId=@newsItem.Id" class="btn-edit">Edit</a>
+                    |
+                    <form method="post" asp-page-handler="Delete" asp-route-id="@newsItem.Id" style="display:inline;">
+                        <input type="hidden" name="id" value="@newsItem.Id" />
+                        <button type="submit" class="btn-delete">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

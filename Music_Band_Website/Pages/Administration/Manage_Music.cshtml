@@ -1,0 +1,152 @@
+﻿@page
+@model Music_Band_Website.Pages.Administration.Manage_MusicModel
+
+<link href="~/css/administration/manage_music.css?v=1.0" rel="stylesheet" />
+
+<h1>Управление на Музика</h1>
+
+@if (TempData["Message"] != null)
+{
+    <div class="alert">@TempData["Message"]</div>
+}
+
+<h2>Жанрове</h2>
+<div class="table-container">
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Жанр</th>
+                <th>Действия</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var type in Model.MusicTypes)
+            {
+                <tr>
+                    <td>@type.Id</td>
+                    <td>
+                        <form method="post" class="inline-form">
+                            <input type="hidden" name="typeId" value="@type.Id" />
+                            <input type="text" name="UpdatedType" value="@type.Type" required />
+                            <button type="submit" asp-page-handler="UpdateType" class="btn-action">
+                                Актуализация
+                                <i class="fas fa-edit"></i>
+                            </button>
+                        </form>
+                    </td>
+                    <td>
+                        <form method="post">
+                            <input type="hidden" name="typeId" value="@type.Id" />
+                            <button type="submit" asp-page-handler="DeleteType" class="btn-delete">
+                                Изтрий
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<form method="post" class="add-form">
+    <input type="text" name="NewMusicType" placeholder="Нов жанр" required />
+    <button type="submit" asp-page-handler="AddType" class="btn-primary">Добави Жанр</button>
+</form>
+
+@if (Model.EditingSong != null)
+{
+    <h2 class="form-title">Edit Song</h2>
+    <form method="post" enctype="multipart/form-data" class="edit-song-form">
+        <input type="hidden" name="SongId" value="@Model.EditingSong.Id" />
+
+        <label>Title:</label>
+        <input type="text" name="Title" value="@Model.EditingSong.Title" required />
+
+        <label>Genre:</label>
+        <select name="Id_Type" required>
+            @foreach (var type in Model.MusicTypes)
+            {
+                <option value="@type.Id" selected="@(Model.EditingSong.Id_Type == type.Id ? "selected" : null)">@type.Type</option>
+            }
+        </select>
+
+        <label>Description:</label>
+        <input type="text" name="Description" value="@Model.EditingSong.Description" required />
+
+        <div class="file-input-group">
+            <label class="file-label">Cover Image:</label>
+            <input type="file" name="CoverImage" accept="image/*" class="file-input" />
+        </div>
+
+        <div class="file-input-group">
+            <label class="file-label">Audio File:</label>
+            <input type="file" name="AudioFile" accept="audio/*" class="file-input" />
+        </div>
+
+        <button type="submit" asp-page-handler="UpdateSong" class="btn-update">Update Song</button>
+    </form>
+}
+
+
+<h2>Песни</h2>
+<div class="table-container">
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Заглавие</th>
+                <th>Жанр</th>
+                <th>Описание</th>
+                <th>Обложка</th>
+                <th>Действия</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var song in Model.Songs)
+            {
+                <tr>
+                    <td>@song.Id</td>
+                    <td>@song.Title</td>
+                    <td>@song.Music_Type.Type</td>
+                    <td>@song.Description</td>
+                    <td><img src="@song.Cover_Image" class="song-cover"></td>
+                    <td>
+                        <form method="post" class="action-form">
+                            <input type="hidden" name="songId" value="@song.Id" />
+                            <button type="submit" asp-page-handler="EditSong" class="btn-action">
+                                Актуализация
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button type="submit" asp-page-handler="DeleteSong" class="btn-delete" onclick="return confirm('Сигурни ли сте?')">
+                                Изтрий
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<h2>Добави Нова Песен</h2>
+<form method="post" enctype="multipart/form-data" class="add-form">
+    <input type="text" name="Title" placeholder="Заглавие" required />
+    <select name="Id_Type" required>
+        @foreach (var type in Model.MusicTypes)
+        {
+            <option value="@type.Id">@type.Type</option>
+        }
+    </select>
+    <input type="text" name="Description" placeholder="Описание" required />
+    <label for="cover-upload" class="file-label">📷 Качи Снимка</label>
+    <input type="file" id="cover-upload" name="CoverImage" accept="image/*" class="file-input" onchange="updateFileName('cover-upload', 'cover-name')">
+    <label for="audio-upload" class="file-label">🎵 Качи Аудио</label>
+    <input type="file" id="audio-upload" name="AudioFile" accept="audio/*" class="file-input" onchange="updateFileName('audio-upload', 'audio-name')">
+
+    <button type="submit" asp-page-handler="AddSong" class="btn-primary">Добави Песен</button>
+</form>
+
+<script src="https://kit.fontawesome.com/YOUR_FONT_AWESOME_KEY.js" crossorigin="anonymous"></script>

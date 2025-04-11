@@ -1,0 +1,64 @@
+﻿@page
+@model Music_Band_Website.Pages.Account.EditModel
+@{
+    ViewData["Title"] = "Edit Profile";
+}
+
+<link rel="stylesheet" href="~/css/account/edit.css" asp-append-version="true" />
+
+
+<div class="edit-container">
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert-danger">@TempData["Error"]</div>
+    }
+    <form method="post" class="edit-form">
+        <input type="hidden" asp-for="User.Id" value="@Model.User?.Id" />
+
+        <div class="profile-section">
+            <h2>Лични данни</h2>
+
+            <div class="form-group">
+                <label for="First_Name">Име</label>
+                <input type="text" id="First_Name" asp-for="User.First_Name" required />
+            </div>
+
+            <div class="form-group">
+                <label for="Last_Name">Фамилия</label>
+                <input type="text" id="Last_Name" asp-for="User.Last_Name" required />
+            </div>
+
+            <div class="form-group">
+                <label for="Email">Имейл</label>
+                <input type="email" id="Email" asp-for="User.Email" required />
+            </div>
+
+            <div class="form-group">
+                <label for="Phone_Number">Тел. Номер</label>
+                <input type="tel" id="Phone_Number" asp-for="User.Phone_Number" />
+            </div>
+        </div>
+
+        <div class="password-section">
+            <h2>Смяна на парола</h2>
+            <input type="hidden" id="CurrentPassword" asp-for="User.Password" value="@Model.User!.Password" />
+
+            <div class="form-group">
+                <input type="password" id="CurrentPassword" asp-for="CurrentPassword" placeholder="Стара парола" />
+            </div>
+
+            <div class="form-group">
+                <input type="password" id="NewPassword" asp-for="NewPassword" placeholder="Нова парола" />
+            </div>
+
+            <div class="form-group">
+                <input type="password" id="ConfirmNewPassword" asp-for="ConfirmNewPassword" placeholder="Потвърди новата парола" />
+            </div>
+        </div>
+
+        <div class="button-group">
+            <button type="submit" class="save-button">Запази промените</button>
+            <a asp-page="/Account/Profile" class="cancel-button">Отказ</a>
+        </div>
+    </form>
+</div>

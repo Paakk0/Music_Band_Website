@@ -1,0 +1,53 @@
+﻿@page
+@model Music_Band_Website.Pages.Profile.Sign_UpModel
+@{
+}
+<link rel="stylesheet" href="~/css/account/sign_in.css?v=1.1">
+
+<body>
+    <div class="login-container">
+        @if (TempData["Error"] != null)
+        {
+            <div class="alert-danger">@TempData["Error"]</div>
+        }
+
+        <form method="post" class="login-form">
+            <h1 class="title">Регистрация</h1>
+
+            <div class="input-group">
+                <input type="text" placeholder="Име" asp-for="User.First_Name" required>
+            </div>
+            <div class="input-group">
+                <input type="text" placeholder="Фамилия" asp-for="User.Last_Name" required>
+            </div>
+            <div class="input-group">
+                <input type="tel" placeholder="Телефонен номер" asp-for="User.Phone_Number" required>
+            </div>
+            <div class="input-group">
+                <input type="email" placeholder="Имейл" asp-for="User.Email" required>
+                @if (TempData["User.Email"] != null)
+                {
+                    <div class="alert-danger">@TempData["User.Email"]</div>
+                }
+            </div>
+            <div class="input-group">
+                <input type="password" placeholder="Парола" asp-for="User.Password" required>
+                @if (TempData["User.Password"] != null)
+                {
+                    <div class="alert-danger">@TempData["User.Password"]</div>
+                }
+            </div>
+            <div class="input-group">
+                <input type="password" placeholder="Потвърди паролата" asp-for="repeatPass" required>
+                @if (TempData["repeatPass"] != null)
+                {
+                    <div class="alert-danger">@TempData["repeatPass"]</div>
+                }
+            </div>
+
+            <button type="submit" class="btn-submit">Регистрация</button>
+            <p class="links">Вече имаш акаунт? <a asp-page="/Account/Sign_In">Вход</a></p>
+        </form>
+    </div>
+</body>
+</html>

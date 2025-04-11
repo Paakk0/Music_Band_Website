@@ -1,0 +1,53 @@
+﻿@{
+    User user = Context.Session.GetObject<User>("User")!;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mental</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Music_Band_Website.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <header>
+        <button id="navbar-toggler" class="on-hover">Hide</button>
+
+        <nav class="navbar box-shadow">
+            <div class="logo">
+                <a class="main-title on-hover" asp-page="/Main">
+                    <img src="~/images/icons/logo.png" alt="Music Band Logo" class="logo-img" />
+                </a>
+            </div>
+            <div class="d-sm-inline-flex justify-content-between">
+                <ul class="navbar-nav flex-grow-1">
+                    @if (user != null)
+                    {
+                        <li class="nav-item"><a class="btn btn-account on-hover" asp-page="/Account/Profile"><img src="~/images/icons/user_icon.png" alt="profile_icon.png" /></a></li>
+                        @if (user.Is_Admin)
+                        {
+                            <li class="nav-item"><a class="btn btn-account on-hover" asp-page="/Administration/AdminMenu"><img src="~/images/icons/admin_panel_icon.png" alt="admin_panel_icon.png" /></a></li>
+                        }
+                    }
+                    else
+                    {
+                        <li class="nav-item"><a class="btn btn-account on-hover" asp-page="/Account/Sign_In"><img src="~/images/icons/user_icon.png" alt="profile_icon.png" /></a></li>
+                    }
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <main>
+        @RenderBody()
+    </main>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

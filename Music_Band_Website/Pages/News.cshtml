@@ -1,0 +1,52 @@
+﻿@page
+@model NewsModel
+@{
+    ViewData["Title"] = "Latest News";
+}
+
+<link rel="stylesheet" href="~/css/news.css">
+
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Последни новини</h1>
+
+    <div class="row">
+        <div class="col-md-12 mb-4">
+            <div class="card shadow-lg border-0">
+                @if (!string.IsNullOrEmpty(Model.AllNews.First().Image))
+                {
+                    <img src="@Model.AllNews.First().Image" class="card-img-top" alt="@Model.AllNews.First().Title">
+                }
+                <div class="card-body">
+                    <h5 class="card-title">@Model.AllNews.First().Title</h5>
+                    <p class="card-text">@Model.AllNews.First().Description</p>
+                    @if (!string.IsNullOrEmpty(Model.AllNews.First().Details))
+                    {
+                        <p class="card-text text-muted">@Model.AllNews.First().Details</p>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        @foreach (var news in Model.AllNews.Skip(1))
+        {
+            <div class="col-md-6 mb-4">
+                <div class="card shadow border-0">
+                    @if (!string.IsNullOrEmpty(news.Image))
+                    {
+                        <img src="@news.Image" class="card-img-top" alt="@news.Title">
+                    }
+                    <div class="card-body">
+                        <h5 class="card-title">@news.Title</h5>
+                        <p class="card-text">@news.Description</p>
+                        @if (!string.IsNullOrEmpty(news.Details))
+                        {
+                            <p class="card-text text-muted">@news.Details</p>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

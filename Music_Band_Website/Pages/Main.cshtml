@@ -1,0 +1,93 @@
+﻿@page
+@model MainModel
+
+<link rel="stylesheet" href="~/css/main.css?v=1.3" asp-append-version="true" />
+
+@if (TempData["Subscription_Error"] != null)
+{
+    <div class="alert-danger">@TempData["Subscription_Error"]</div>
+}
+else if (TempData["Subscription_Success"] != null)
+{
+    <div class="alert-success">@TempData["Subscription_Success"]</div>
+}
+
+<div class="hero">
+    <div class="hero-content">
+        <h1>Добре дошли в нашия свят на музиката!</h1>
+        <p>Присъединете се към нас и открийте ритъма на вдъхновението.</p>
+        <a href="Music" class="btn-primary">Чуйте нашата музика</a>
+    </div>
+</div>
+
+<nav class="navigation-list">
+    <a class="page-link" asp-page="About">
+        <div class="container">
+            <h3 class="title">За нас</h3>
+            <p>Научете повече за нашето пътуване, мисия и страстта, която ни кара да създаваме музика.</p>
+        </div>
+    </a>
+    <a class="page-link" asp-page="News">
+        <div class="container">
+            <h3 class="title">Новини</h3>
+            <p>Бъдете в течение с най-новите съобщения, актуализации и новини за групата.</p>
+        </div>
+    </a>
+    <a class="page-link" asp-page="Music">
+        <div class="container">
+            <h3 class="title">Нашата музика</h3>
+            <p>Открийте най-новите ни песни, албуми и историите зад нашата музика.</p>
+        </div>
+    </a>
+    <a class="page-link" asp-page="Events">
+        <div class="container">
+            <h3 class="title">Събития</h3>
+            <p>Вижте нашите предстоящи концерти, дати на събития и подробности за изпълненията на живо.</p>
+        </div>
+    </a>
+</nav>
+
+<section class="featured">
+    <h2>Акценти</h2>
+    <div class="featured-items">
+        <div class="featured-item">
+            <h3>🔥 Най-новата ни песен!</h3>
+            <p>Чуйте сега - <strong>"@Model.LatestSong.Title"</strong>!</p>
+            <a asp-page="/Song_Player" asp-route-id="@Model.LatestSong.Id" class="btn-secondary">Слушай</a>
+        </div>
+        @if (Model.NextConcert != null)
+        {
+            <div class="featured-item">
+                <h3>🎤 Следващият концерт</h3>
+                <p>Елате на живо в @Model.NextConcert.City - <strong>@Model.NextConcert.DateTime.ToString("f")</strong></p>
+                <a asp-page="/Event_Details" asp-route-id="@Model.NextConcert.Id" class="btn-secondary">Купи билети</a>
+            </div>
+        }
+    </div>
+</section>
+
+<section class="cta">
+    <h2>Абонирайте се за нашия бюлетин</h2>
+    <p>Бъдете първи, които ще научат за новите ни песни!</p>
+    <form method="POST">
+        @if (Model.User != null)
+        {
+            <input type="email" name="email" placeholder="Въведете вашия имейл" value="@Model.User.Email" required>
+        }
+        else
+        {
+            <input type="email" name="email" placeholder="Въведете вашия имейл" required>
+        }
+        <button type="submit" class="btn-primary">Абонирай се</button>
+
+    </form>
+</section>
+
+<footer class="footer">
+    <p>&copy; 2025 Всички права запазени. | Следвайте ни:</p>
+    <div class="social-links">
+        <a href="https://www.facebook.com/"><img src="~/images/icons/facebook_icon.png" alt="Facebook"></a>
+        <a href="https://www.instagram.com"><img src="~/images/icons/instagram_icon.png" alt="Instagram"></a>
+        <a href="https://www.spotify.com"><img src="~/images/icons/spotify_icon.png" alt="Spotify"></a>
+    </div>
+</footer>

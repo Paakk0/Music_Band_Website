@@ -1,0 +1,31 @@
+﻿@page
+@model Music_Band_Website.Pages.EventsModel
+@{
+    Layout = "_Layout";
+}
+
+<link rel="stylesheet" href="~/css/events.css?v=1.3">
+<script src="~/js/events.js?v=1.0"></script>
+
+<div class="event-container">
+    <h1>🎶 Събития</h1>
+
+    <div class="event-filters">
+        <input type="text" id="event-search-city" placeholder="Търси по град..">
+        <input type="text" id="event-search-location" placeholder="Търси по локация..">
+        <input type="date" id="event-search-date">
+    </div>
+
+    <div class="event-grid" id="event-list">
+        @foreach (var eventItem in Model.Events)
+        {
+            <a asp-page="Event_Details" asp-route-id="@eventItem.Id" class="event-card" data-name="@eventItem.City" data-location="@eventItem.Location" data-date="@eventItem.DateTime.ToString("yyyy-MM-dd")">
+                <div class="event-date">@eventItem.DateTime.ToString("dd MMM")</div>
+                <div class="event-info">
+                    <h2>@eventItem.City</h2>
+                    <p>@eventItem.Location</p>
+                </div>
+            </a>
+        }
+    </div>
+</div>

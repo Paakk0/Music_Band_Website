@@ -1,0 +1,112 @@
+﻿body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--main-color);
+    color: var(--light-text);
+    margin: 0;
+    text-align: center;
+}
+
+.event-container {
+    margin-top: 10vh;
+}
+
+h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: var(--accent-color);
+}
+
+.event-filters {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+    .event-filters input {
+        width: 100%;
+        max-width: 250px;
+        padding: 12px;
+        font-size: 1rem;
+        border: none;
+        border-radius: 25px;
+        background: rgba(255, 255, 255, 0.1);
+        color: var(--light-text);
+        text-align: center;
+        outline: none;
+        transition: 0.3s ease;
+    }
+
+        .event-filters input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .event-filters input:focus {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .event-filters input[type="date"] {
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+
+.event-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.event-card {
+    position: relative;
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 20px;
+    width: 300px;
+    text-align: left;
+    text-decoration:none;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+    transition: 0.3s ease;
+    overflow: hidden;
+}
+
+    .event-card:hover {
+        background: var(--hover-bg);
+        transform: translateY(-5px);
+    }
+
+    .event-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 5px;
+        height: 100%;
+        background: var(--accent-color);
+    }
+
+.event-info h2 {
+    font-size: 1.8rem;
+    margin: 0;
+}
+
+.event-info p {
+    font-size: 1rem;
+    margin: 5px 0;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.event-date {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: var(--accent-color);
+    color: var(--hover-text);
+    font-size: 1rem;
+    font-weight: bold;
+    padding: 8px 12px;
+    border-radius: 5px;
+}

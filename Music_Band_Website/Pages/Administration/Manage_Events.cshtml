@@ -1,0 +1,59 @@
+﻿@page
+@model Music_Band_Website.Pages.Administration.Manage_EventsModel
+
+<link href="~/css/administration/manage_events.css" rel="stylesheet" />
+
+<h1 class="page-title">Manage Events</h1>
+
+<h2 class="section-title">Add New Event</h2>
+<form method="post" asp-page-handler="Add" class="event-form">
+    <label class="form-label">Location:</label>
+    <input type="text" asp-for="NewEvent.Location" class="form-input" required />
+
+    <label class="form-label">City:</label>
+    <input type="text" asp-for="NewEvent.City" class="form-input" required />
+
+    <label class="form-label">Date & Time:</label>
+    <input type="datetime-local" asp-for="NewEvent.DateTime" class="form-input" required />
+
+    <button type="submit" class="btn-submit">Add Event</button>
+</form>
+
+<hr class="divider">
+
+<h2 class="section-title">Existing Events</h2>
+<table class="event-table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Location</th>
+            <th>City</th>
+            <th>Date & Time</th>
+            <th colspan="3">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var eventItem in Model.Events)
+        {
+            <tr class="event-row">
+                <form method="post" asp-page-handler="Update" class="event-update-form">
+                <td>@eventItem.Id</td>
+                <td><input type="text" name="location" value="@eventItem.Location" class="form-input small" required /></td>
+                <td><input type="text" name="city" value="@eventItem.City" class="form-input small" required /></td>
+                <td><input type="datetime-local" name="dateTime" value="@eventItem.DateTime.ToString("yyyy-MM-ddTHH:mm")" class="form-input" required /></td>
+                <input type="hidden" name="id" value="@eventItem.Id" />
+                <td><button type="submit" class="btn-action">Update</button></td>
+                </form>
+
+                <td class="event-actions">
+                    <form method="post" asp-page-handler="Delete" onsubmit="return confirm('Are you sure?');" class="event-delete-form">
+                        <input type="hidden" name="id" value="@eventItem.Id" />
+                        <button type="submit" class="btn-danger">Delete</button>
+                    </form>
+                </td>
+                <td><a asp-page="Manage_Event_Songs" asp-route-id="@eventItem.Id" class="btn-link">View Songs</a></td>
+
+            </tr>
+        }
+    </tbody>
+</table>

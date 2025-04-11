@@ -1,0 +1,37 @@
+﻿@page
+@model Music_Band_Website.Pages.Song_PlayerModel
+@{
+    Layout = "_Layout";
+}
+
+<link rel="stylesheet" href="~/css/song_player.css?v=1.0">
+
+<div class="audio-container">
+    <div class="song-header">
+        <img src="@Model.Song.Cover_Image" alt="@Model.Song.Title" class="song-cover">
+        <div class="song-details">
+            <h1>@Model.Song.Title</h1>
+            <h2>Mental</h2>
+            <p>@Model.Song.Description</p>
+        </div>
+    </div>
+    @if (Model.User != null)
+    {
+        <form method="post">
+            <input type="hidden" name="id" value="@Model.Song.Id" />
+            @if (Model.IsSongLiked(Model.Song.Id))
+            {
+                <input type="hidden" name="method" value="2" />
+                <button type="submit" class="btn-like liked">❤️</button>
+            }
+            else
+            {
+                <input type="hidden" name="method" value="1" />
+                <button type="submit" class="btn-like">🤍</button>
+            }
+        </form>
+    }
+    <div class="audio-player">
+        <audio controls loop src="~/uploads/player.mp3" type="audio/mp3"></audio>
+    </div>
+</div>

@@ -1,0 +1,117 @@
+﻿:root {
+    --background-dark: #1a1a1a;
+    --text-light: #ffffff;
+    --border-light: rgba(255, 255, 255, 0.2);
+    --input-bg: rgba(255, 255, 255, 0.1);
+}
+
+.alert-danger, .alert-success {
+    margin: 0 2rem;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.alert-danger {
+    background-color: #ff4d4d;
+    color: white;
+}
+
+.alert-success {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.edit-container {
+    position:absolute;
+    top:7.5rem;
+    width: 80%;
+    padding: 20px;
+    border-radius: 10px;
+    background: var(--background-dark);
+    box-shadow: 0px 0px 15px var(--accent-color);
+    color: var(--text-light);
+    text-align: center;
+}
+
+h1 {
+    color: var(--accent-color);
+    margin-bottom: 20px;
+}
+
+.edit-form {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.profile-section, .password-section {
+    width: 45%;
+    text-align: left;
+    padding: 15px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.05);
+    box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.1);
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 5px;
+    color: var(--text-light);
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--border-light);
+    border-radius: 5px;
+    background: var(--input-bg);
+    color: var(--text-light);
+}
+
+.button-group {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.save-button,
+.cancel-button {
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: bold;
+    transition: 0.3s ease;
+}
+
+.save-button {
+    background-color: var(--accent-color);
+    color: var(--text-light);
+    border: none;
+    cursor: pointer;
+}
+
+    .save-button:hover {
+        background-color: var(--main-color);
+        transform: scale(1.05);
+    }
+
+.cancel-button {
+    background-color: transparent;
+    color: var(--text-light);
+    border: 1px solid var(--text-light);
+    margin-left: 10px;
+}
+
+    .cancel-button:hover {
+        background-color: var(--text-light);
+        color: var(--main-color);
+    }

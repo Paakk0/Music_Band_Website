@@ -1,0 +1,115 @@
+﻿.page-title {
+    text-align: center;
+    color: var(--text-light);
+    margin-bottom: 30px;
+}
+
+.section-title {
+    text-align: center;
+    color: var(--text-light);
+    margin-top: 20px;
+}
+
+.existing-news-title {
+    color: var(--text-light);
+    margin-top: 40px;
+    text-align: center;
+}
+
+.news-form {
+    display: flex;
+    flex-direction: column;
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background: var(--table-bg);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.form-label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.form-input,
+.form-textarea,
+.form-file-input {
+    padding: 10px;
+    border: 1px solid var(--accent-color);
+    border-radius: 5px;
+    background: var(--main-color);
+    color: var(--text-light);
+    margin-bottom: 20px;
+}
+
+.btn-submit {
+    padding: 12px 20px;
+    background: var(--accent-color);
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s ease;
+    margin-top: 10px;
+}
+
+    .btn-submit:hover {
+        background: var(--btn-color);
+    }
+
+.btn-edit,
+.btn-delete {
+    padding: 6px 12px;
+    font-size: 14px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.btn-edit {
+    background: var(--secondary-color);
+    color: white;
+}
+
+    .btn-edit:hover {
+        background: var(--btn-color);
+    }
+
+.btn-delete {
+    background: red;
+    color: white;
+}
+
+    .btn-delete:hover {
+        background: darkred;
+    }
+
+.news-table {
+    width: 90%;
+    margin: 30px auto;
+    border-collapse: collapse;
+    background: var(--table-bg);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+    .news-table th, .news-table td {
+        padding: 12px;
+        border-bottom: 1px solid var(--main-color);
+        text-align: center;
+    }
+
+    .news-table thead {
+        background-color: var(--lighter-main-color);
+    }
+
+.news-actions {
+    text-align: center;
+}
+
+.news-table tr:hover {
+    background-color: var(--hover-bg);
+}

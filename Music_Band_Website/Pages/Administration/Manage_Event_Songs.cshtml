@@ -1,0 +1,49 @@
+﻿@page
+@model Music_Band_Website.Pages.Administration.Manage_Event_SongsModel
+
+<link href="~/css/administration/manage_event_songs.css" rel="stylesheet" />
+
+<h1 class="page-title">Manage Songs for Event: @Model.Event.Location (@Model.Event.City)</h1>
+
+<h2 class="section-title">Add Song to Event</h2>
+<a asp-page="Manage_Events" class="btn-link">Back to Events</a>
+<form method="post" asp-page-handler="AddSong" class="song-form">
+    <label class="form-label">Select Song:</label>
+    <select asp-for="SelectedSongId" class="form-select" required>
+        @foreach (var song in Model.AllSongs)
+        {
+            <option value="@song.Id">@song.Title (@song.Music_Type.Type)</option>
+        }
+    </select>
+    <input type="hidden" name="EventId" value="@Model.Event.Id" />
+    <button type="submit" class="btn-submit">Add Song</button>
+</form>
+
+<hr class="divider">
+
+<h2 class="section-title">Event Songs</h2>
+<table class="event-songs-table">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Genre</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var song in Model.EventSongs)
+        {
+            <tr class="song-row">
+                <td>@song.Title</td>
+                <td>@song.Music_Type.Type</td>
+                <td class="song-actions">
+                    <form method="post" asp-page-handler="RemoveSong" onsubmit="return confirm('Remove this song from event?');" class="remove-form">
+                        <input type="hidden" name="EventId" value="@Model.Event.Id" />
+                        <input type="hidden" name="songId" value="@song.Id" />
+                        <button type="submit" class="btn-danger">Remove</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

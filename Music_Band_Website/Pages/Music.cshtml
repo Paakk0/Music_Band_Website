@@ -1,0 +1,72 @@
+﻿@page
+@model Music_Band_Website.Pages.MusicModel
+
+<link rel="stylesheet" href="~/css/music.css">
+<script src="~/js/music.js?v=1.4"></script>
+
+<h1 class="page-title">Списък с песни</h1>
+
+<div class="filters">
+    <input type="text" id="filter-title" placeholder="Търсене по заглавие...">
+    <select id="filter-type">
+        <option value="">Всички жанрове</option>
+        @foreach (var type in Model.MusicTypes)
+        {
+            <option value="@type.Type">@type.Type</option>
+        }
+    </select>
+    @if (Model.User != null)
+    {
+        <div class="checkbox-container">
+            <input type="checkbox" id="filter-liked" name="filter-liked" value="1" />
+            <label for="filter-liked">❤️ Показване само на харесани песни</label>
+        </div>
+    }
+</div>
+
+<table class="song-table">
+    <thead>
+        <tr>
+            <th>Обложка</th>
+            <th>Заглавие</th>
+            <th>Описание</th>
+            <th>Жанр</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody id="song-list">
+        @foreach (var song in Model.Songs)
+        {
+            <tr class="song-item" data-type="@song.Music_Type.Type"
+                data-liked="@(Model.User != null && Model.IsSongLiked(song.Id) ? "true" : "false")">
+                <td><img src="@song.Cover_Image" alt="@song.Title" class="song-cover"></td>
+                <td>@song.Title</td>
+                <td>@song.Description</td>
+                <td>@song.Music_Type.Type</td>
+                <td>
+                    <a asp-page="/Song_Player" asp-route-id="@song.Id" class="btn-play">▶ Play</a>
+                    @if (Model.User != null)
+                    {
+                        <form method="post" class="like-form">
+                            <input type="hidden" name="id" value="@song.Id" />
+                            @if (Model.IsSongLiked(song.Id))
+                            {
+                                <input type="hidden" name="method" value="2" />
+                                <button type="submit" class="btn-like liked">
+                                    ❤️
+                                </button>
+                            }
+                            else
+                            {
+                                <input type="hidden" name="method" value="1" />
+                                <button type="submit" class="btn-like">
+                                    🤍
+                                </button>
+                            }
+                        </form>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

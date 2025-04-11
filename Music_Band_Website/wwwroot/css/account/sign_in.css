@@ -1,0 +1,86 @@
+﻿.login-container {
+    width: 100vw;
+    max-width: 400px;
+    height: 100vh;
+    position: absolute;
+    top: 15%;
+    left: auto;
+    padding: 20px;
+}
+
+.login-form {
+    background: rgba(25, 35, 100, 0.3);
+    padding: 30px;
+    border-radius: 2rem;
+    border: 2px solid var(--accent-color);
+    box-shadow: 0 0 20px var(--accent-color);
+    text-align: center;
+}
+
+.title {
+    color: var(--accent-color);
+    text-shadow: 0 0 10px var(--accent-color);
+    margin-bottom: 20px;
+}
+
+.input-group {
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid var(--accent-color);
+    background: rgba(2,2,2,0.3);
+    color: white;
+    text-align: center;
+    border-radius: 2.5rem;
+    transition: 0.3s;
+}
+
+    input:hover {
+        transform: scaleX(1.1);
+    }
+
+    input:focus {
+        box-shadow: 0 0 10px var(--accent-color);
+        transform: scale(1.1);
+    }
+
+.btn-submit {
+    width: 100%;
+    padding: 10px;
+    background: var(--accent-color);
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+    box-shadow: 0 0 10px var(--accent-color);
+    border-radius: 2.5rem;
+    margin-bottom: 10px;
+    transition: 0.3s;
+}
+
+    .btn-submit:hover {
+        s background: var(--main-color);
+        box-shadow: 0 0 20px var(--main-color);
+        transform: scale(1.1);
+    }
+
+.links a {
+    color: var(--accent-color);
+    text-decoration: none;
+    transition: 0.3s ease-in-out;
+}
+
+    .links a:hover {
+        color: red;
+        text-decoration-line: underline;
+    }
+
+.alert-danger {
+    color: red;
+    padding: 5px;
+    background: rgb(0,0,0,0);
+    margin-bottom: 10px;
+}

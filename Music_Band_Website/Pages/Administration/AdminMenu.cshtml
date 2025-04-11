@@ -1,0 +1,29 @@
+﻿@page
+@model Music_Band_Website.Pages.Administration.AdminMenuModel
+
+<link href="~/css/administration/adminmenu.css" rel="stylesheet" />
+
+<div class="admin-container">
+    <h1>Административен Панел</h1>
+
+    <div class="admin-grid">
+        <a asp-page="/Administration/Manage_Users" class="admin-card">
+            <i class="fas fa-users"></i>
+            <span>Потребители</span>
+        </a>
+        <a asp-page="/Administration/Manage_Music" class="admin-card">
+            <i class="fas fa-music"></i>
+            <span>Музика</span>
+        </a>
+        <a asp-page="/Administration/Manage_Events" class="admin-card">
+            <i class="fas fa-calendar-alt"></i>
+            <span>Събития</span>
+        </a>
+        <a asp-page="/Administration/Manage_News" class="admin-card">
+            <i class="fas fa-newspaper"></i>
+            <span>Новини</span>
+        </a>
+    </div>
+</div>
+
+<script src="https://kit.fontawesome.com/YOUR_FONT_AWESOME_KEY.js" crossorigin="anonymous"></script>
